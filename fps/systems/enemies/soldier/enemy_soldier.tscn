@@ -1,0 +1,49 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://systems/enemies/enemy_soldier.gd" id="1_body"]
+[ext_resource type="Resource" path="res://data/enemies/fuzileiro_alemao.tres" id="2_data"]
+[ext_resource type="Script" path="res://systems/combat/health.gd" id="3_health"]
+[ext_resource type="Script" path="res://systems/enemies/soldier/soldier_brain.gd" id="4_brain"]
+[ext_resource type="Script" path="res://systems/enemies/perception.gd" id="5_perception"]
+[ext_resource type="Script" path="res://systems/characters/humanoid_visual.gd" id="6_visual"]
+[ext_resource type="PackedScene" path="res://assets/personagens/alemao/soldado_alemao.glb" id="8_alemao"]
+[ext_resource type="PackedScene" path="res://assets/personagens/panzergrenadier/panzergrenadier.glb" id="9_panzer"]
+[ext_resource type="PackedScene" path="res://assets/armas/kar98k/kar98k.glb" id="10_kar"]
+
+[sub_resource type="CapsuleShape3D" id="Shape_corpo"]
+radius = 0.3
+height = 1.45
+
+[node name="EnemySoldier" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_body")
+data = ExtResource("2_data")
+metadata/surface = &"corpo"
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.725, 0)
+shape = SubResource("Shape_corpo")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_health")
+
+[node name="Brain" type="Node" parent="."]
+script = ExtResource("4_brain")
+
+[node name="Perception" type="Node" parent="."]
+script = ExtResource("5_perception")
+
+[node name="NavAgent" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.6
+target_desired_distance = 0.6
+height = 1.75
+radius = 0.4
+
+[node name="Visual" type="Node3D" parent="."]
+script = ExtResource("6_visual")
+model_scene = ExtResource("8_alemao")
+model_variants = Array[PackedScene]([ExtResource("8_alemao"), ExtResource("8_alemao"), ExtResource("9_panzer")])
+rifle_scene = ExtResource("10_kar")
+helmet_style = "nenhum"
+model_brightness = 1.15

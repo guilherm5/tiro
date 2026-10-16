@@ -1,0 +1,57 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://levels/props/alvo.gd" id="1_alvo"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_tabua"]
+albedo_color = Color(0.72, 0.62, 0.45, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Mat_centro"]
+albedo_color = Color(0.15, 0.12, 0.1, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Mesh_tabua"]
+material = SubResource("Mat_tabua")
+size = Vector3(0.6, 0.8, 0.04)
+
+[sub_resource type="BoxMesh" id="Mesh_poste"]
+material = SubResource("Mat_tabua")
+size = Vector3(0.08, 1.0, 0.08)
+
+[sub_resource type="CylinderMesh" id="Mesh_centro"]
+material = SubResource("Mat_centro")
+top_radius = 0.12
+bottom_radius = 0.12
+height = 0.005
+
+[sub_resource type="BoxShape3D" id="Shape_tabua"]
+size = Vector3(0.6, 0.8, 0.04)
+
+[sub_resource type="BoxShape3D" id="Shape_poste"]
+size = Vector3(0.08, 1.0, 0.08)
+
+[node name="Alvo" type="RigidBody3D"]
+mass = 6.0
+freeze = true
+script = ExtResource("1_alvo")
+metadata/surface = &"madeira"
+
+[node name="Tabua" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+mesh = SubResource("Mesh_tabua")
+
+[node name="Centro" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 1.35, 0.022)
+mesh = SubResource("Mesh_centro")
+
+[node name="Poste" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("Mesh_poste")
+
+[node name="ColisaoTabua" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+shape = SubResource("Shape_tabua")
+
+[node name="ColisaoPoste" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("Shape_poste")

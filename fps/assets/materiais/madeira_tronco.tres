@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/texturas/bark_brown_02/bark_brown_02_cor.jpg" id="1_cor"]
+[ext_resource type="Texture2D" path="res://assets/texturas/bark_brown_02/bark_brown_02_normal.jpg" id="2_normal"]
+[ext_resource type="Texture2D" path="res://assets/texturas/bark_brown_02/bark_brown_02_rugosidade.jpg" id="3_rug"]
+
+[resource]
+albedo_color = Color(0.62, 0.58, 0.52, 1)
+albedo_texture = ExtResource("1_cor")
+roughness_texture = ExtResource("3_rug")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("2_normal")
+uv1_scale = Vector3(1.2, 0.8, 1)
+texture_filter = 5

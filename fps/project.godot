@@ -1,0 +1,50 @@
+; Engine configuration file.
+; Edite pelo editor do Godot (Projeto > Configurações do Projeto) sempre que possível.
+
+config_version=5
+
+[application]
+
+config/name="Operação Última Linha"
+config/description="FPS narrativo — Normandia, junho de 1944."
+run/main_scene="res://levels/menu/menu_principal.tscn"
+config/features=PackedStringArray("4.7", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+InputSetup="*res://autoload/input_setup.gd"
+Settings="*res://autoload/settings.gd"
+EventBus="*res://autoload/event_bus.gd"
+DebugKeys="*res://autoload/debug_keys.gd"
+Objectives="*res://autoload/objectives.gd"
+Dialogue="*res://autoload/dialogue.gd"
+Cutscenes="*res://autoload/cutscenes.gd"
+Checkpoints="*res://autoload/checkpoints.gd"
+SceneLoader="*res://autoload/scene_loader.gd"
+
+[display]
+
+window/size/viewport_width=1600
+window/size/viewport_height=900
+
+[layer_names]
+
+3d_physics/layer_1="mundo"
+3d_physics/layer_2="jogador"
+3d_physics/layer_3="inimigos"
+3d_physics/layer_4="agua"
+3d_physics/layer_5="blindagem"
+3d_physics/layer_6="interacao"
+3d_render/layer_1="mundo"
+3d_render/layer_2="arma_primeira_pessoa"
+3d_render/layer_3="personagens"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+common/physics_ticks_per_second=60
+
+[rendering]
+
+anti_aliasing/quality/screen_space_aa=1

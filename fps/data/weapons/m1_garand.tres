@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3]
+
+[ext_resource type="Script" path="res://systems/weapons/weapon_data.gd" id="1_data"]
+[ext_resource type="AudioStream" path="res://assets/audio/armas/garand_tiro.tres" id="2_fire"]
+[ext_resource type="AudioStream" path="res://assets/audio/provisorio/garand_seco.wav" id="3_dry"]
+[ext_resource type="AudioStream" path="res://assets/audio/armas/garand_pente_entra.wav" id="4_insert"]
+[ext_resource type="AudioStream" path="res://assets/audio/armas/garand_ferrolho.wav" id="5_bolt"]
+[ext_resource type="AudioStream" path="res://assets/audio/provisorio/garand_ping.wav" id="6_ping"]
+
+[resource]
+script = ExtResource("1_data")
+display_name = "M1 Garand"
+damage = 100.0
+max_range = 300.0
+min_shot_interval = 0.14
+impact_impulse = 7.0
+magazine_size = 8
+starting_reserve = 48
+reload_time = 2.2
+ejects_clip_when_empty = true
+spread_hip = 1.6
+spread_aim = 0.1
+spread_moving = 1.8
+spread_per_shot = 0.9
+spread_recovery = 4.0
+aim_kick_pitch = 1.1
+aim_kick_yaw = 0.35
+view_kick_pitch = 3.0
+view_kick_roll = 1.2
+camera_trauma = 0.22
+model_kick_back = 0.07
+model_kick_rotation_degrees = 7.0
+aim_fov = 52.0
+aim_time = 0.22
+aim_sensitivity_multiplier = 0.7
+aim_move_multiplier = 0.65
+sound_fire = ExtResource("2_fire")
+sound_dry = ExtResource("3_dry")
+sound_reload_insert = ExtResource("4_insert")
+sound_reload_end = ExtResource("5_bolt")
+sound_clip_eject = ExtResource("6_ping")

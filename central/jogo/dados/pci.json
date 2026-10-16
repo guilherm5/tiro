@@ -1,0 +1,117 @@
+{
+	"nome": "PCI",
+	"modelo": "res://assets/personagens/pci/pci_v5.glb",
+	"atlas_2p": "res://assets/personagens/pci/pci_atlas_2p.png",
+	"vida": 140,
+	"movimento": {
+		"andar_frente": 1.6, "andar_tras": 1.3,
+		"corrida_distancia": 0.9, "corrida_quadros": 14,
+		"esquiva_distancia": 0.9, "esquiva_quadros": 20,
+		"passo_distancia": 0.9, "passo_quadros": 16,
+		"pulo_preparo": 5, "pulo_quadros": 40, "pulo_altura": 1.1, "pulo_velocidade": 2.4, "pulo_aterrissagem": 4
+	},
+	"katana_na_mao": {"pos": [0.0, 0.08, 0.03], "rot": [0, 0, -90]},
+	"katana_comprimento": 0.86,
+	"raiz_removida": ["chute_voador", "corte_duplo", "empurrao", "furacao", "lancado", "queda"],
+	"vertical_removida": ["pulo", "chute_voador"],
+	"golpes": {
+		"jab": {
+			"nome": "Jab", "comando": "1", "anim": "jab", "trecho": [0.05, 0.25, 0.36, 0.62],
+			"inicio": 10, "ativo": 3, "recuperacao": 14,
+			"dano": 6, "nivel": "alto", "ossos": ["LeftHand"], "raio": 0.12,
+			"vantagem_acerto": 6, "vantagem_bloqueio": 1, "empurra": 0.2,
+			"cancela": {"2": "um_dois"}, "janela_cancelar": [11, 26]
+		},
+		"um_dois": {
+			"nome": "Um-dois", "comando": "", "anim": "soco", "trecho": [0.2, 0.38, 0.52, 0.85],
+			"inicio": 11, "ativo": 3, "recuperacao": 17,
+			"dano": 9, "nivel": "alto", "ossos": ["RightHand"], "raio": 0.12,
+			"vantagem_acerto": 4, "vantagem_bloqueio": -2, "empurra": 0.3,
+			"cancela": {"4": "um_dois_quatro", "especial": ""}, "janela_cancelar": [12, 28]
+		},
+		"um_dois_quatro": {
+			"nome": "Um-dois-chute", "comando": "", "anim": "chute_circular", "trecho": [0.2, 0.38, 0.5, 0.75],
+			"inicio": 16, "ativo": 5, "recuperacao": 26,
+			"dano": 15, "nivel": "medio", "ossos": ["RightFoot"], "raio": 0.14,
+			"vantagem_acerto": 0, "vantagem_bloqueio": -12, "empurra": 0.6, "efeito": "queda"
+		},
+		"soco": {
+			"nome": "Direto", "comando": "2", "anim": "soco", "trecho": [0.05, 0.38, 0.52, 0.85],
+			"inicio": 12, "ativo": 3, "recuperacao": 18,
+			"dano": 10, "nivel": "alto", "ossos": ["RightHand"], "raio": 0.12,
+			"vantagem_acerto": 4, "vantagem_bloqueio": -3, "empurra": 0.3,
+			"cancela": {"especial": ""}, "janela_cancelar": [12, 26]
+		},
+		"chute": {
+			"nome": "Chute alto", "comando": "3", "anim": "chute", "trecho": [0.1, 0.35, 0.46, 0.72],
+			"inicio": 15, "ativo": 4, "recuperacao": 22,
+			"dano": 14, "nivel": "alto", "ossos": ["LeftFoot"], "raio": 0.14,
+			"vantagem_acerto": 6, "vantagem_bloqueio": -7, "empurra": 0.45
+		},
+		"chute_circular": {
+			"nome": "Chute circular", "comando": "4", "anim": "chute_circular", "trecho": [0.15, 0.38, 0.5, 0.75],
+			"inicio": 18, "ativo": 5, "recuperacao": 24,
+			"dano": 17, "nivel": "medio", "ossos": ["RightFoot"], "raio": 0.14,
+			"vantagem_acerto": 8, "vantagem_bloqueio": -9, "empurra": 0.55
+		},
+		"rasteira": {
+			"nome": "Rasteira", "comando": "d+4", "anim": "rasteira", "trecho": [0.05, 0.24, 0.36, 0.7],
+			"inicio": 17, "ativo": 5, "recuperacao": 28, "postura": "agachado",
+			"dano": 12, "nivel": "baixo", "ossos": ["RightFoot", "LeftFoot"], "raio": 0.26,
+			"vantagem_acerto": 0, "vantagem_bloqueio": -16, "empurra": 0.3, "efeito": "queda"
+		},
+		"rasteira_3": {
+			"nome": "Rasteira", "comando": "d+3", "copia": "rasteira"
+		},
+		"gancho": {
+			"nome": "Gancho", "comando": "df+2", "anim": "gancho", "trecho": [0.1, 0.32, 0.42, 0.75],
+			"inicio": 15, "ativo": 4, "recuperacao": 26,
+			"dano": 13, "nivel": "medio", "ossos": ["LeftHand"], "raio": 0.22,
+			"vantagem_acerto": 0, "vantagem_bloqueio": -14, "empurra": 0.1, "efeito": "lancar"
+		},
+		"agarrao": {
+			"nome": "Agarrão", "comando": "1+2", "anim": "empurrao", "trecho": [0.0, 0.04, 0.08, 0.22],
+			"inicio": 10, "ativo": 3, "recuperacao": 30,
+			"dano": 22, "nivel": "agarrao", "alcance": 0.95,
+			"vantagem_acerto": 0, "vantagem_bloqueio": 0, "empurra": 1.2, "efeito": "queda"
+		},
+		"chute_voador": {
+			"nome": "Chute voador", "comando": "ar+3", "anim": "chute_voador", "trecho": [0.1, 0.25, 0.42, 0.6],
+			"inicio": 7, "ativo": 10, "recuperacao": 4, "postura": "ar",
+			"dano": 14, "nivel": "aereo", "ossos": ["LeftFoot", "RightFoot"], "raio": 0.16,
+			"vantagem_acerto": 10, "vantagem_bloqueio": 2, "empurra": 0.4
+		},
+		"chute_voador_4": {
+			"nome": "Chute voador", "comando": "ar+4", "copia": "chute_voador"
+		},
+		"shuriken": {
+			"nome": "Shuriken", "comando": "qcf+1", "especial": true, "anim": "arremesso", "trecho": [0.2, 0.42, 0.47, 0.7],
+			"inicio": 18, "ativo": 2, "recuperacao": 24,
+			"dano": 9, "nivel": "medio", "projetil": {"velocidade": 9.0, "vida": 70, "osso": "RightHand"},
+			"vantagem_acerto": 12, "vantagem_bloqueio": 4, "empurra": 0.3
+		},
+		"corte": {
+			"nome": "Corte relâmpago", "comando": "qcf+2", "especial": true, "anim": "corte", "trecho": [0.15, 0.38, 0.52, 0.78],
+			"inicio": 18, "ativo": 6, "recuperacao": 26, "katana": true, "avanco": 0.5,
+			"dano": 18, "nivel": "medio", "ossos": ["katana"], "raio": 0.12,
+			"vantagem_acerto": 0, "vantagem_bloqueio": -16, "empurra": 0.6, "efeito": "queda", "raspao": 0.15
+		},
+		"voadora": {
+			"nome": "Voadora do corvo", "comando": "qcb+3", "especial": true, "anim": "chute_voador", "trecho": [0.0, 0.22, 0.45, 0.62],
+			"inicio": 14, "ativo": 10, "recuperacao": 16, "avanco": 2.0, "altura": 0.6,
+			"dano": 16, "nivel": "aereo", "ossos": ["LeftFoot", "RightFoot"], "raio": 0.16,
+			"vantagem_acerto": 4, "vantagem_bloqueio": -8, "empurra": 0.6, "efeito": "queda", "raspao": 0.15
+		},
+		"voadora_4": {
+			"nome": "Voadora do corvo", "comando": "qcb+4", "copia": "voadora"
+		},
+		"tempestade": {
+			"nome": "Tempestade de aço", "comando": "qcf+1+2", "especial": true, "super": true, "custo": 100,
+			"anim": "corte_duplo", "trecho": [0.25, 0.36, 1.0, 1.0],
+			"inicio": 8, "ativo": 64, "recuperacao": 20, "katana": true, "avanco": 2.2, "invencivel": 14,
+			"janelas": [[19, 26], [44, 51], [63, 71]],
+			"dano": 14, "nivel": "medio", "ossos": ["katana"], "raio": 0.18,
+			"vantagem_acerto": 0, "vantagem_bloqueio": -20, "empurra": 0.05, "efeito_final": "queda", "raspao": 0.2
+		}
+	}
+}

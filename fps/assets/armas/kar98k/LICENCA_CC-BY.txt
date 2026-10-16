@@ -1,0 +1,11 @@
+Model Information:
+* title:	Kar98k Free Model
+* source:	https://sketchfab.com/3d-models/kar98k-free-model-e88c90c8e203401fa28e8f4ef03e657f
+* author:	Danya (https://sketchfab.com/dsamuta)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Kar98k Free Model" (https://sketchfab.com/3d-models/kar98k-free-model-e88c90c8e203401fa28e8f4ef03e657f) by Danya (https://sketchfab.com/dsamuta) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

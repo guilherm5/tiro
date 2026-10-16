@@ -1,0 +1,84 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://systems/fx/fire_flicker.gd" id="1_flicker"]
+[ext_resource type="AudioStream" path="res://assets/audio/provisorio/fogo.wav" id="2_som"]
+[ext_resource type="PackedScene" path="res://systems/fx/smoke_column.tscn" id="3_fumaca"]
+
+[sub_resource type="Gradient" id="Gradient_chama"]
+offsets = PackedFloat32Array(0, 0.3, 1)
+colors = PackedColorArray(1, 0.9, 0.6, 1, 1, 0.5, 0.15, 0.8, 0.6, 0.15, 0.05, 0)
+
+[sub_resource type="GradientTexture2D" id="Tex_chama"]
+gradient = SubResource("Gradient_chama")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="Mat_chama"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("Tex_chama")
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_chama"]
+material = SubResource("Mat_chama")
+size = Vector2(1.2, 1.2)
+
+[sub_resource type="Curve" id="Curve_encolhe"]
+_data = [Vector2(0, 1), 0.0, -0.8, 0, 0, Vector2(1, 0.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="Tex_encolhe"]
+curve = SubResource("Curve_encolhe")
+
+[sub_resource type="Gradient" id="Gradient_cor"]
+colors = PackedColorArray(2.5, 1.6, 0.8, 1, 1.2, 0.35, 0.1, 0)
+
+[sub_resource type="GradientTexture1D" id="Tex_cor"]
+gradient = SubResource("Gradient_cor")
+use_hdr = true
+
+[sub_resource type="ParticleProcessMaterial" id="Proc_chama"]
+emission_shape = 1
+emission_sphere_radius = 0.8
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.5
+gravity = Vector3(0, 1.0, 0)
+scale_min = 0.7
+scale_max = 1.5
+scale_curve = SubResource("Tex_encolhe")
+color_ramp = SubResource("Tex_cor")
+
+[node name="Fire" type="Node3D"]
+
+[node name="Chamas" type="GPUParticles3D" parent="."]
+amount = 40
+lifetime = 0.9
+visibility_aabb = AABB(-4, -1, -4, 8, 8, 8)
+process_material = SubResource("Proc_chama")
+draw_pass_1 = SubResource("Quad_chama")
+
+[node name="Luz" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+layers = 3
+light_color = Color(1, 0.55, 0.25, 1)
+light_energy = 2.5
+omni_range = 12.0
+script = ExtResource("1_flicker")
+
+[node name="Fumaca" parent="." instance=ExtResource("3_fumaca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Som" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_som")
+unit_size = 6.0
+max_distance = 60.0
+autoplay = true
+bus = &"Ambiente"

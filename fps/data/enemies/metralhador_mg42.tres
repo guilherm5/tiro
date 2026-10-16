@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3]
+
+[ext_resource type="Script" path="res://systems/enemies/enemy_data.gd" id="1_data"]
+
+[resource]
+script = ExtResource("1_data")
+display_name = "Metralhador (MG42)"
+max_health = 100.0
+headshot_multiplier = 4.0
+sight_range = 150.0
+sight_fov_degrees = 100.0
+notice_time = 0.35
+hearing_range = 120.0
+turn_speed = 20.0

@@ -1,0 +1,171 @@
+# MISSÃO 1 — DESEMBARQUE (trecho jogável da demo)
+# Texto do roteiro (docs/ROTEIRO_MESTRE.md). Edite à vontade: o jogo relê ao iniciar.
+# [id] = cena/sequência   [!id] = falas contextuais (sorteadas)
+# @pausa N = silêncio   @evento nome = avisa o jogo neste ponto
+
+# --- Sequência de gameplay: a praia -------------------------------------------
+
+[praia_desembarque]
+MILLER: SAIAM! SAIAM DA EMBARCAÇÃO!
+REED: METRALHADORA À FRENTE!
+MILLER: USEM OS OBSTÁCULOS! MOVAM-SE!
+
+[praia_ferido]
+SOLDADO FERIDO: Não me deixa aqui! Por favor!
+
+# Miller puxa Hayes para trás de um obstáculo.
+[praia_obstaculo]
+MILLER: Hayes! Olhe para mim! A posição de metralhadora está cobrindo a praia inteira. Se ficarmos aqui, ninguém atravessa!
+HAYES: Entendido.
+MILLER: Reed, consegue localizar de onde vem o fogo?
+REED: Da estrutura de concreto, à esquerda! Segundo andar ou uma abertura lateral!
+MILLER: Walker, fique com os feridos atrás daquela barreira. Reed, mantenha o rádio funcionando. Hayes, comigo!
+REED: Sargento, a seteira tem uma chapa de aço! Os tiros só ricocheteiam!
+MILLER: Então ninguém pega aquele desgraçado pela frente. Tem uma abertura no muro, mas está fechada com arame farpado.
+MILLER: Hayes! O engenheiro caído perto da cratera estava com um torpedo Bangalore. Pegue e abra aquele arame!
+@evento objetivo_bangalore
+
+# --- Falas contextuais do combate ---------------------------------------------
+
+[!parado_na_areia]
+MILLER: Não fique parado na areia! Procure cobertura!
+
+[!exposto]
+MILLER: Hayes, saia dessa posição! Você está completamente exposto!
+
+[!combate_radio]
+REED, PELO RÁDIO: A posição continua ativa! Não consigo contato com a unidade da esquerda!
+
+[!combate_feridos]
+WALKER: Tenho feridos aqui! Preciso de cobertura, agora!
+
+# --- Após neutralizar a metralhadora ------------------------------------------
+
+[mg_neutralizada]
+MILLER: A metralhadora parou! Avancem para o muro!
+@pausa 1.5
+REED: Estou recebendo alguma coisa... Comando, aqui é o soldado Reed. Solicito confirmação da rota de avanço.
+RÁDIO: ...rota comprometida... unidades dispersas... prossigam para o ponto de reunião secundário...
+MILLER: Você ouviu. Vamos nos reagrupar.
+
+# --- A brecha no muro (Missão 1 reestruturada) --------------------------------
+
+[bangalore_pego]
+MILLER: Isso! Agora até o arame! Espere a metralhadora parar para trocar o cano e corra!
+
+[fogo_no_buraco]
+HAYES: Pavio aceso!
+MILLER: FOGO NO BURACO! Todo mundo abaixado!
+
+[arame_aberto]
+MILLER: Passagem aberta! Hayes, comigo! A trincheira leva até os fundos do bunker!
+REED: Alemães na trincheira! Eles ouviram a explosão!
+
+[fundos_bunker]
+MILLER: Ali, a porta dos fundos. Entre e cale aquela metralhadora. Eu cubro a trincheira.
+
+[!mg_troca_cano]
+REED: Ele está trocando o cano! Agora, Hayes, agora!
+MILLER: A metralhadora parou! Corra!
+REED: Recarregando! Vai, vai, vai!
+
+[!granada]
+MILLER: GRANADA! Saia daí!
+REED: Granada!
+
+# ==============================================================================
+# CUTSCENES (câmera: @camera NOME; nomes = nós em Cutscenes/Cameras da fase)
+# ==============================================================================
+
+# --- CUTSCENE DE ABERTURA — DENTRO DA EMBARCAÇÃO ------------------------------
+[abertura_barco]
+# O casco range e a embarcação balança violentamente. Explosões ao longe.
+@camera barco_geral
+@tremer 0.3
+@pausa 3.0
+@camera barco_miller
+MILLER: Confiram as armas. Carregadores, granadas, equipamento. Façam isso agora.
+@camera barco_reed
+REED: O comando disse que a artilharia atingiria as posições antes da nossa chegada.
+@camera barco_miller
+MILLER: Disse que tentaria atingir. Não é a mesma coisa.
+@camera barco_walker
+WALKER: Temos feridos previstos no desembarque?
+@camera barco_miller
+MILLER: Temos uma praia inteira de homens que podem precisar de você. Fique perto do grupo.
+@camera barco_hayes
+HAYES: Qual é o ponto de reunião?
+@camera barco_miller
+MILLER: Atrás da primeira linha de obstáculos, junto ao muro de concreto. Se nos separarmos, é para lá que você vai.
+# Uma explosão próxima sacode a embarcação.
+@explosao explosao_barco_1 agua
+@tremer 0.9
+@pausa 1.5
+@camera barco_reed
+REED: Sargento... e se a posição ainda estiver intacta?
+@camera barco_miller
+MILLER: Então vamos ter que lidar com ela.
+# O rádio chia.
+@camera barco_reed
+RÁDIO: Unidade de desembarque, atenção... resistência pesada na faixa costeira... posições de metralhadora ainda ativas... comunicação interrompida...
+@camera barco_miller
+MILLER: Vocês ouviram. Quando a rampa baixar, saiam imediatamente. Não parem para procurar um caminho perfeito. Usem os obstáculos e avancem.
+@camera barco_walker
+WALKER: E se alguém cair?
+@camera barco_miller
+MILLER: Se houver cobertura e você puder alcançá-lo, ajude. Se não houver, não transforme dois feridos em quatro.
+# A embarcação reduz a velocidade.
+@explosao explosao_barco_2 agua
+@tremer 0.5
+@camera barco_rampa
+MILLER: Preparar para desembarque!
+@evento rampa_abaixa
+@pausa 1.8
+
+# --- CENA — O PRIMEIRO MORTO --------------------------------------------------
+[primeiro_morto]
+# O esquadrão alcança o muro de concreto. Walker atende um soldado gravemente ferido.
+@camera morto_geral
+@pausa 2.0
+@camera morto_walker
+WALKER: Ele não vai conseguir continuar.
+@camera morto_miller
+MILLER: Consegue transportá-lo?
+@camera morto_walker
+WALKER: Não sem deixar os outros para trás.
+# O soldado ferido segura o braço de Walker.
+@camera morto_ferido
+SOLDADO FERIDO: Minha família... você pode escrever para eles?
+WALKER: Posso.
+SOLDADO FERIDO: Diga que eu tentei voltar.
+# Walker permanece em silêncio. O soldado perde a consciência.
+@pausa 2.5
+@camera morto_reed
+REED: Sargento...
+@camera morto_miller
+MILLER: Não agora, Reed.
+@camera morto_reed
+REED: Eu só ia dizer que o rádio voltou.
+# Miller olha para Hayes.
+@camera morto_miller
+@pausa 1.2
+MILLER: Você fez o que precisava fazer lá fora. Não confunda isso com ter controle sobre tudo o que acontece aqui.
+MILLER: Recolham o que puderem carregar. Partimos em dois minutos.
+@pausa 1.0
+
+# --- CUTSCENE DE ENCERRAMENTO -------------------------------------------------
+[encerramento]
+# O esquadrão avança para longe da praia. Embarcações continuam chegando ao fundo.
+@camera fim_praia
+@evento esquadrao_avanca
+@pausa 2.5
+REED: Comando confirmou uma posição defensiva a alguns quilômetros daqui. Há um informante escondido em uma vila próxima.
+MILLER: Nome?
+REED: Marcel Duval. Trabalhava com a resistência francesa. Tem informações sobre as comunicações alemãs e a defesa da região.
+@camera fim_esquadrao
+HAYES: E nós vamos buscá-lo?
+MILLER: Vamos encontrá-lo, retirar as informações e abrir a rota para o avanço.
+WALKER: E os homens que ficaram na praia?
+@camera_mover fim_alto 9
+MILLER: Se houver uma maneira de voltar por eles, nós voltaremos.
+@pausa 4.0

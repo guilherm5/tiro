@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://levels/props/concreto.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" path="res://assets/texturas/concrete_wall_008/concrete_wall_008_cor.jpg" id="1_cor"]
+[ext_resource type="Texture2D" path="res://assets/texturas/concrete_wall_008/concrete_wall_008_normal.jpg" id="2_normal"]
+[ext_resource type="Texture2D" path="res://assets/texturas/concrete_wall_008/concrete_wall_008_rugosidade.jpg" id="3_rug"]
+
+[sub_resource type="FastNoiseLite" id="Noise_conc"]
+frequency = 0.025
+fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="Tex_conc"]
+width = 256
+height = 256
+seamless = true
+noise = SubResource("Noise_conc")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/albedo_tex = ExtResource("1_cor")
+shader_parameter/normal_tex = ExtResource("2_normal")
+shader_parameter/rough_tex = ExtResource("3_rug")
+shader_parameter/noise_tex = SubResource("Tex_conc")
+shader_parameter/tile = 3.0
+shader_parameter/ground_y = 1.8
+shader_parameter/camo = 0.7

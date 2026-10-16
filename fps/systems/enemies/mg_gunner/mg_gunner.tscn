@@ -1,0 +1,93 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://systems/enemies/soldier/enemy_soldier.tscn" id="1_soldier"]
+[ext_resource type="Resource" path="res://data/enemies/metralhador_mg42.tres" id="2_data"]
+[ext_resource type="Script" path="res://systems/enemies/mg_gunner/mg_gunner_brain.gd" id="3_brain"]
+[ext_resource type="AudioStream" path="res://assets/audio/armas/mg42_tiro.tres" id="4_shot"]
+[ext_resource type="AudioStream" path="res://assets/audio/armas/mg42_cauda.wav" id="5_tail"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_mg"]
+albedo_color = Color(0.13, 0.13, 0.13, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="Mesh_corpo_mg"]
+material = SubResource("Mat_mg")
+size = Vector3(0.08, 0.12, 0.75)
+
+[sub_resource type="CylinderMesh" id="Mesh_cano_mg"]
+material = SubResource("Mat_mg")
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.5
+radial_segments = 10
+rings = 1
+
+[sub_resource type="Gradient" id="Gradient_clarao"]
+offsets = PackedFloat32Array(0, 0.25, 1)
+colors = PackedColorArray(1, 0.95, 0.8, 1, 1, 0.6, 0.2, 0.7, 1, 0.4, 0.1, 0)
+
+[sub_resource type="GradientTexture2D" id="Tex_clarao"]
+gradient = SubResource("Gradient_clarao")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="Mat_clarao"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_texture = SubResource("Tex_clarao")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Mesh_clarao"]
+material = SubResource("Mat_clarao")
+size = Vector2(0.7, 0.7)
+
+[node name="MgGunner" instance=ExtResource("1_soldier")]
+data = ExtResource("2_data")
+
+[node name="Brain" parent="." index="2"]
+script = ExtResource("3_brain")
+damage = 14.0
+spread_degrees = 1.7
+sound_shot = ExtResource("4_shot")
+sound_tail = ExtResource("5_tail")
+
+[node name="Visual" parent="." index="5"]
+has_rifle = false
+
+[node name="MG42" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 1.62, -0.5)
+
+[node name="Corpo" type="MeshInstance3D" parent="MG42"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15)
+mesh = SubResource("Mesh_corpo_mg")
+
+[node name="Cano" type="MeshInstance3D" parent="MG42"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.01, -0.75)
+mesh = SubResource("Mesh_cano_mg")
+
+[node name="Muzzle" type="Marker3D" parent="MG42"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -1.02)
+
+[node name="Flash" type="MeshInstance3D" parent="MG42/Muzzle"]
+cast_shadow = 0
+mesh = SubResource("Mesh_clarao")
+
+[node name="Light" type="OmniLight3D" parent="MG42/Muzzle"]
+layers = 3
+light_color = Color(1, 0.72, 0.4, 1)
+light_energy = 4.0
+omni_range = 8.0
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="MG42"]
+stream = ExtResource("4_shot")
+unit_size = 30.0
+max_distance = 400.0
+max_polyphony = 8
+pitch_scale = 0.85
+bus = &"SFX"

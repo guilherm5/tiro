@@ -1,0 +1,118 @@
+# MISSÃO 1 — DESEMBARQUE (demo)
+# Liga acontecimentos da fase a falas (data/dialogue/m1_desembarque.dlg) e objetivos.
+# Pontos/marcadores: nós em Missao/Pontos na cena da fase.
+# Textos de objetivo marcados com (PROVISÓRIO) não estão no roteiro: revisar.
+
+[quando inicio]
+cartela "MISSÃO 1 — DESEMBARQUE" "Normandia, junho de 1944 — 06h28"
+cutscene abertura_barco
+evento rampa_abaixa
+dialogo praia_desembarque
+mover MILLER obstaculo_miller
+mover REED reed_obstaculo
+mover WALKER walker_barreira
+mover SOLDADO1 soldado1_obstaculo
+mover SOLDADO2 soldado2_obstaculo
+# (PROVISÓRIO) objetivo inicial antes da ordem do Miller
+objetivo obstaculos "Saia da água e alcance os obstáculos." obstaculo_miller
+checkpoint inicio_jogador
+
+[quando area_beira_dagua]
+dialogo praia_ferido
+
+[quando area_obstaculos]
+concluir obstaculos
+aguardar_dialogo
+dialogo praia_obstaculo
+
+# Disparado pelo @evento no fim da fala do Miller: a seteira é blindada, é preciso
+# flanquear. Primeiro o torpedo Bangalore do engenheiro caído.
+[quando objetivo_bangalore]
+objetivo bangalore "Pegue o torpedo Bangalore do engenheiro caído." bangalore
+checkpoint checkpoint_obstaculos
+
+[quando bangalore_pego]
+concluir bangalore
+dialogo bangalore_pego
+objetivo arame "Plante o torpedo no arame farpado da abertura do muro." arame
+mover MILLER miller_arame
+mover REED reed_arame
+mover SOLDADO1 soldado1_arame
+mover SOLDADO2 soldado2_arame
+checkpoint checkpoint_bangalore
+
+[quando bangalore_plantado]
+concluir arame
+dialogo fogo_no_buraco
+
+[quando arame_destruido]
+aguardar_dialogo
+dialogo arame_aberto
+objetivo trincheira "Avance pela trincheira até os fundos do bunker." trincheira_fim
+mover MILLER miller_trincheira
+mover REED reed_trincheira
+checkpoint checkpoint_arame
+
+[quando area_fundos_bunker se arame]
+concluir trincheira
+dialogo fundos_bunker
+objetivo mg "Entre no bunker e neutralize a metralhadora." porta_bunker
+checkpoint checkpoint_bunker
+
+# Morte do metralhador (death_event no nó Metralhador).
+[quando mg_morta]
+concluir obstaculos
+concluir bangalore
+concluir arame
+concluir trincheira
+concluir mg
+dialogo mg_neutralizada
+mover MILLER muro_miller
+mover REED reed_muro
+mover WALKER walker_ferido
+mover SOLDADO1 soldado1_muro
+mover SOLDADO2 soldado2_muro
+aguardar_dialogo
+objetivo muro "Volte ao ponto de reunião junto ao muro de concreto." ponto_reuniao
+checkpoint checkpoint_mg
+
+[quando area_muro se mg]
+concluir muro
+posicionar_jogador jogador_muro
+posicionar MILLER miller_cena
+posicionar WALKER walker_ferido
+posicionar REED reed_muro
+posicionar SOLDADO1 soldado1_muro
+posicionar SOLDADO2 soldado2_muro
+cutscene primeiro_morto final
+cutscene encerramento final
+missao_concluida "DESEMBARQUE"
+
+# Durante o encerramento: o esquadrão segue para longe da praia.
+[quando esquadrao_avanca]
+mover MILLER saida_1
+mover REED saida_2
+mover WALKER saida_3
+mover SOLDADO1 saida_4
+mover SOLDADO2 saida_5
+
+# --- Falas contextuais (detector de situações de combate) ---------------------
+
+[sempre jogador_parado]
+fala parado_na_areia
+
+[sempre jogador_exposto]
+fala exposto
+
+[sempre combate_periodico]
+fala combate_radio
+
+[sempre combate_periodico_2]
+fala combate_feridos
+
+# A MG parou para trocar o cano (janela para correr), só enquanto ela importa.
+[sempre mg_recarregando]
+fala mg_troca_cano
+
+[sempre granada_inimiga]
+fala granada

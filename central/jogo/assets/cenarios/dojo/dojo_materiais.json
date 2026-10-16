@@ -1,0 +1,298 @@
+{
+ "objetos": {
+  "piso": {
+   "materiais": [
+    "piso"
+   ],
+   "luz": "luz_piso.png"
+  },
+  "borda": {
+   "materiais": [
+    "borda"
+   ],
+   "luz": "luz_borda.png"
+  },
+  "tatame": {
+   "materiais": [
+    "tatame"
+   ],
+   "luz": "luz_tatame.png"
+  },
+  "paredes_tabua": {
+   "materiais": [
+    "tabua"
+   ],
+   "luz": "luz_paredes_tabua.png"
+  },
+  "paredes_reboco": {
+   "materiais": [
+    "reboco"
+   ],
+   "luz": "luz_paredes_reboco.png"
+  },
+  "madeira": {
+   "materiais": [
+    "madeira"
+   ],
+   "luz": "luz_madeira.png"
+  },
+  "papel": {
+   "materiais": [
+    "papel"
+   ]
+  },
+  "teto": {
+   "materiais": [
+    "tabua"
+   ],
+   "luz": "luz_teto.png"
+  },
+  "lanternas": {
+   "materiais": [
+    "lanterna"
+   ]
+  },
+  "estandartes": {
+   "materiais": [
+    "estandarte_budo",
+    "estandarte_shinobi",
+    "estandarte_tamashii",
+    "estandarte_shin"
+   ],
+   "luz": "luz_estandartes.png"
+  },
+  "objetos": {
+   "materiais": [
+    "madeira",
+    "bokken",
+    "corda",
+    "laca",
+    "pele_taiko"
+   ],
+   "luz": "luz_objetos.png"
+  },
+  "jardim": {
+   "materiais": [
+    "tabua",
+    "pedra",
+    "bambu",
+    "folhas"
+   ],
+   "luz": "luz_jardim.png"
+  },
+  "ceu": {
+   "materiais": [
+    "ceu"
+   ]
+  },
+  "lua": {
+   "materiais": [
+    "lua"
+   ]
+  }
+ },
+ "texturas": {
+  "piso": {
+   "arquivo": "piso.jpg",
+   "tinta": [
+    0.55,
+    0.46,
+    0.4
+   ]
+  },
+  "tatame": {
+   "arquivo": "tatame.jpg",
+   "tinta": [
+    0.74,
+    0.76,
+    0.52
+   ]
+  },
+  "tabua": {
+   "arquivo": "tabua.jpg",
+   "tinta": [
+    0.8,
+    0.72,
+    0.66
+   ]
+  },
+  "madeira": {
+   "arquivo": "madeira.jpg",
+   "tinta": [
+    0.9,
+    0.8,
+    0.74
+   ]
+  },
+  "reboco": {
+   "arquivo": "reboco.jpg",
+   "tinta": [
+    0.86,
+    0.76,
+    0.6
+   ]
+  },
+  "pedra": {
+   "arquivo": "pedra.jpg",
+   "tinta": [
+    0.7,
+    0.72,
+    0.75
+   ]
+  },
+  "estandarte_budo": {
+   "arquivo": "estandarte_budo.png",
+   "tinta": [
+    1,
+    1,
+    1
+   ]
+  },
+  "estandarte_shinobi": {
+   "arquivo": "estandarte_shinobi.png",
+   "tinta": [
+    1,
+    1,
+    1
+   ]
+  },
+  "estandarte_tamashii": {
+   "arquivo": "estandarte_tamashii.png",
+   "tinta": [
+    1,
+    1,
+    1
+   ]
+  },
+  "estandarte_shin": {
+   "arquivo": "estandarte_shin.png",
+   "tinta": [
+    1,
+    1,
+    1
+   ]
+  },
+  "papel": {
+   "arquivo": "papel.png",
+   "tinta": [
+    1.0,
+    0.82,
+    0.55
+   ]
+  },
+  "ceu": {
+   "arquivo": "ceu.png",
+   "tinta": [
+    1,
+    1,
+    1
+   ]
+  },
+  "lua": {
+   "arquivo": "lua.png",
+   "tinta": [
+    1,
+    1,
+    1
+   ]
+  }
+ },
+ "cores": {
+  "borda": [
+   0.035,
+   0.04,
+   0.03
+  ],
+  "pele_taiko": [
+   0.75,
+   0.68,
+   0.52
+  ],
+  "corda": [
+   0.08,
+   0.03,
+   0.02
+  ],
+  "bambu": [
+   0.18,
+   0.32,
+   0.1
+  ],
+  "folhas": [
+   0.03,
+   0.08,
+   0.04
+  ],
+  "bokken": [
+   0.55,
+   0.42,
+   0.28
+  ],
+  "laca": [
+   0.25,
+   0.04,
+   0.03
+  ]
+ },
+ "emissivos": {
+  "papel": {
+   "cor": [
+    1.0,
+    0.82,
+    0.55
+   ],
+   "forca": 2.2
+  },
+  "lanterna": {
+   "cor": [
+    1.0,
+    0.55,
+    0.22
+   ],
+   "forca": 6.0
+  },
+  "ceu": {
+   "cor": [
+    1,
+    1,
+    1
+   ],
+   "forca": 1.0
+  },
+  "lua": {
+   "cor": [
+    1,
+    1,
+    1
+   ],
+   "forca": 1.0
+  }
+ },
+ "lanternas": [
+  [
+   -3.4,
+   -3.4,
+   3.35
+  ],
+  [
+   3.4,
+   -3.4,
+   3.35
+  ],
+  [
+   -3.4,
+   3.4,
+   3.35
+  ],
+  [
+   3.4,
+   3.4,
+   3.35
+  ],
+  [
+   2.6,
+   -11.5,
+   1.2
+  ]
+ ]
+}

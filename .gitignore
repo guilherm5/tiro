@@ -1,0 +1,12 @@
+# Só as pastas dos jogos entram no repo
+/*
+!/.gitignore
+!/README.md
+!/central/
+!/fps/
+
+# Cache do Godot (regenera sozinho)
+.godot/
+
+# Binário do Godot passa do limite de 100MB do GitHub
+/central/ferramentas/Godot_*

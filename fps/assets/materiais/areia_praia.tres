@@ -1,0 +1,44 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://levels/terrain/terrain.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" path="res://assets/texturas/sand_02/sand_02_cor.jpg" id="2"]
+[ext_resource type="Texture2D" path="res://assets/texturas/sand_02/sand_02_normal.jpg" id="3"]
+[ext_resource type="Texture2D" path="res://assets/texturas/sand_02/sand_02_rugosidade.jpg" id="4"]
+[ext_resource type="Texture2D" path="res://assets/texturas/sparse_grass/sparse_grass_cor.jpg" id="8"]
+[ext_resource type="Texture2D" path="res://assets/texturas/sparse_grass/sparse_grass_normal.jpg" id="9"]
+[ext_resource type="Texture2D" path="res://assets/texturas/dry_ground_rocks/dry_ground_rocks_cor.jpg" id="10"]
+[ext_resource type="Texture2D" path="res://assets/texturas/dry_ground_rocks/dry_ground_rocks_normal.jpg" id="11"]
+[ext_resource type="Texture2D" path="res://assets/texturas/rock_face_03/rock_face_03_cor.jpg" id="12"]
+[ext_resource type="Texture2D" path="res://assets/texturas/rock_face_03/rock_face_03_normal.jpg" id="13"]
+[ext_resource type="Texture2D" path="res://assets/texturas/damp_beach_sand_02/damp_beach_sand_02_cor.jpg" id="5"]
+[ext_resource type="Texture2D" path="res://assets/texturas/damp_beach_sand_02/damp_beach_sand_02_normal.jpg" id="6"]
+[ext_resource type="Texture2D" path="res://assets/texturas/damp_beach_sand_02/damp_beach_sand_02_rugosidade.jpg" id="7"]
+
+[sub_resource type="FastNoiseLite" id="Noise_quebra"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="Tex_quebra"]
+width = 256
+height = 256
+seamless = true
+noise = SubResource("Noise_quebra")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/dry_albedo = ExtResource("2")
+shader_parameter/dry_normal = ExtResource("3")
+shader_parameter/dry_roughness = ExtResource("4")
+shader_parameter/wet_albedo = ExtResource("5")
+shader_parameter/wet_normal = ExtResource("6")
+shader_parameter/wet_roughness = ExtResource("7")
+shader_parameter/breakup_noise = SubResource("Tex_quebra")
+shader_parameter/grass_albedo = ExtResource("8")
+shader_parameter/grass_normal = ExtResource("9")
+shader_parameter/dirt_albedo = ExtResource("10")
+shader_parameter/dirt_normal = ExtResource("11")
+shader_parameter/rock_albedo = ExtResource("12")
+shader_parameter/rock_normal = ExtResource("13")
+shader_parameter/tile_size = 4.0
+shader_parameter/water_level = -1.5
+shader_parameter/wet_band = 1.6

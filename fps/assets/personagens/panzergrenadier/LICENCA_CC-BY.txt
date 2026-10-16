@@ -1,0 +1,11 @@
+Model Information:
+* title:	WW2 Panzergrenadier 2k (CC0)
+* source:	https://sketchfab.com/3d-models/ww2-panzergrenadier-2k-cc0-6a104431bcb8400080b79446ec019696
+* author:	britdawgmasterfunk (https://sketchfab.com/britdawgmasterfunk)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "WW2 Panzergrenadier 2k (CC0)" (https://sketchfab.com/3d-models/ww2-panzergrenadier-2k-cc0-6a104431bcb8400080b79446ec019696) by britdawgmasterfunk (https://sketchfab.com/britdawgmasterfunk) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

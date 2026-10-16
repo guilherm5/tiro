@@ -1,0 +1,11 @@
+Model Information:
+* title:	WW2 German Wehrmacht Soldier
+* source:	https://sketchfab.com/3d-models/ww2-german-wehrmacht-soldier-8f519608b01247fbb9d7bc119ce961ff
+* author:	Tactical_Gamer (https://sketchfab.com/Tactical_Beard)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "WW2 German Wehrmacht Soldier" (https://sketchfab.com/3d-models/ww2-german-wehrmacht-soldier-8f519608b01247fbb9d7bc119ce961ff) by Tactical_Gamer (https://sketchfab.com/Tactical_Beard) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

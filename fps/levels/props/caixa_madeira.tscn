@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="Mat_caixa"]
+albedo_color = Color(0.42, 0.33, 0.2, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="Mesh_caixa"]
+material = SubResource("Mat_caixa")
+size = Vector3(0.6, 0.45, 0.45)
+
+[sub_resource type="BoxShape3D" id="Shape_caixa"]
+size = Vector3(0.6, 0.45, 0.45)
+
+[node name="CaixaMadeira" type="RigidBody3D"]
+mass = 4.0
+metadata/surface = &"madeira"
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_caixa")
+
+[node name="Colisao" type="CollisionShape3D" parent="."]
+shape = SubResource("Shape_caixa")

@@ -1,0 +1,285 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://systems/ui/hud.gd" id="1_hud"]
+[ext_resource type="Script" path="res://systems/ui/crosshair.gd" id="2_cross"]
+[ext_resource type="Shader" path="res://systems/ui/damage_overlay.gdshader" id="3_overlay"]
+[ext_resource type="Script" path="res://systems/ui/damage_indicator.gd" id="4_indicator"]
+[ext_resource type="Script" path="res://systems/ui/health_bar.gd" id="5_health"]
+[ext_resource type="AudioStream" path="res://assets/audio/provisorio/marcador_acerto.wav" id="6_marker"]
+[ext_resource type="Script" path="res://systems/ui/subtitles.gd" id="7_subs"]
+[ext_resource type="Script" path="res://systems/ui/objective_display.gd" id="8_obj"]
+[ext_resource type="Script" path="res://systems/ui/pause_menu.gd" id="9_pausa"]
+
+[sub_resource type="ShaderMaterial" id="Mat_overlay"]
+shader = ExtResource("3_overlay")
+shader_parameter/desaturation = 0.0
+shader_parameter/vignette = 0.0
+shader_parameter/flash = 0.0
+shader_parameter/flash_color = Color(0.45, 0.02, 0, 1)
+shader_parameter/blur = 0.0
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="DamageOverlay" type="ColorRect" parent="."]
+visible = false
+material = SubResource("Mat_overlay")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DamageIndicator" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_indicator")
+
+[node name="Crosshair" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_cross")
+
+[node name="HealthBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -50.0
+offset_right = 252.0
+offset_bottom = -40.0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("5_health")
+
+[node name="Ammo" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -70.0
+offset_right = -32.0
+offset_bottom = -28.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 28
+text = "8  |  48"
+horizontal_alignment = 2
+
+[node name="Objective" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("8_obj")
+
+[node name="Panel" type="VBoxContainer" parent="Objective"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 96.0
+offset_right = 520.0
+offset_bottom = 160.0
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Objective/Panel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.55, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
+theme_override_font_sizes/font_size = 13
+text = "OBJETIVO"
+
+[node name="Text" type="Label" parent="Objective/Panel"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 3
+
+[node name="MissionComplete" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.85)
+
+[node name="Texto" type="Label" parent="MissionComplete"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -50.0
+offset_right = 400.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.74, 1)
+theme_override_font_sizes/font_size = 30
+text = "MISSÃO CONCLUÍDA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Letterbox" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Topo" type="ColorRect" parent="Letterbox"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+anchor_bottom = 0.11
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Base" type="ColorRect" parent="Letterbox"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 0.89
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TitleCard" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Titulo" type="Label" parent="TitleCard"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -45.0
+offset_right = 500.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.88, 0.85, 0.77, 1)
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitulo" type="Label" parent="TitleCard"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = 15.0
+offset_right = 500.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.7, 0.68, 0.62, 1)
+theme_override_font_sizes/font_size = 19
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitles" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -190.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("7_subs")
+
+[node name="Label" type="RichTextLabel" parent="Subtitles"]
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.15
+anchor_right = 0.85
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.85)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 21
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+script = ExtResource("9_pausa")
+
+[node name="HitMarkerAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_marker")
+volume_db = -6.0
+max_polyphony = 2
+
+[node name="DeathScreen" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.92)
+
+[node name="Texto" type="Label" parent="DeathScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -30.0
+offset_right = 300.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8, 0.78, 0.72, 1)
+theme_override_font_sizes/font_size = 30
+text = "VOCÊ MORREU"
+horizontal_alignment = 1
+vertical_alignment = 1

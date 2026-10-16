@@ -1,0 +1,167 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://systems/fx/explosion.gd" id="1_script"]
+
+[sub_resource type="Gradient" id="Gradient_suave"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="Tex_suave"]
+gradient = SubResource("Gradient_suave")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="Mat_nuvem"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("Tex_suave")
+roughness = 1.0
+billboard_mode = 3
+billboard_keep_scale = true
+proximity_fade_enabled = true
+proximity_fade_distance = 1.5
+
+[sub_resource type="QuadMesh" id="Quad_nuvem"]
+material = SubResource("Mat_nuvem")
+size = Vector2(2.5, 2.5)
+
+[sub_resource type="Curve" id="Curve_cresce"]
+_data = [Vector2(0, 0.3), 0.0, 1.8, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="Tex_cresce"]
+curve = SubResource("Curve_cresce")
+
+[sub_resource type="Gradient" id="Gradient_terra"]
+offsets = PackedFloat32Array(0, 0.1, 1)
+colors = PackedColorArray(0.35, 0.3, 0.22, 1, 0.45, 0.39, 0.3, 0.9, 0.55, 0.5, 0.42, 0)
+
+[sub_resource type="GradientTexture1D" id="Tex_terra"]
+gradient = SubResource("Gradient_terra")
+
+[sub_resource type="ParticleProcessMaterial" id="Proc_terra"]
+direction = Vector3(0, 1, 0)
+spread = 22.0
+initial_velocity_min = 8.0
+initial_velocity_max = 18.0
+gravity = Vector3(0, -9.8, 0)
+damping_min = 2.0
+damping_max = 4.0
+scale_min = 0.8
+scale_max = 1.8
+scale_curve = SubResource("Tex_cresce")
+color_ramp = SubResource("Tex_terra")
+
+[sub_resource type="Gradient" id="Gradient_agua"]
+offsets = PackedFloat32Array(0, 0.15, 1)
+colors = PackedColorArray(0.9, 0.92, 0.92, 1, 0.8, 0.84, 0.85, 0.85, 0.75, 0.8, 0.82, 0)
+
+[sub_resource type="GradientTexture1D" id="Tex_agua"]
+gradient = SubResource("Gradient_agua")
+
+[sub_resource type="ParticleProcessMaterial" id="Proc_agua"]
+direction = Vector3(0, 1, 0)
+spread = 12.0
+initial_velocity_min = 10.0
+initial_velocity_max = 22.0
+gravity = Vector3(0, -9.8, 0)
+damping_min = 1.0
+damping_max = 2.0
+scale_min = 0.6
+scale_max = 1.5
+scale_curve = SubResource("Tex_cresce")
+color_ramp = SubResource("Tex_agua")
+
+[sub_resource type="Gradient" id="Gradient_fumaca"]
+offsets = PackedFloat32Array(0, 0.1, 1)
+colors = PackedColorArray(0.2, 0.19, 0.17, 0, 0.25, 0.24, 0.22, 0.4, 0.4, 0.4, 0.4, 0)
+
+[sub_resource type="GradientTexture1D" id="Tex_fumaca"]
+gradient = SubResource("Gradient_fumaca")
+
+[sub_resource type="ParticleProcessMaterial" id="Proc_fumaca"]
+emission_shape = 1
+emission_sphere_radius = 1.5
+direction = Vector3(0, 1, 0)
+spread = 40.0
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+gravity = Vector3(0.4, 0.6, 0)
+damping_min = 0.5
+damping_max = 1.0
+scale_min = 1.5
+scale_max = 2.5
+scale_curve = SubResource("Tex_cresce")
+color_ramp = SubResource("Tex_fumaca")
+
+[sub_resource type="ParticleProcessMaterial" id="Proc_detritos"]
+direction = Vector3(0, 1, 0)
+spread = 45.0
+initial_velocity_min = 6.0
+initial_velocity_max = 14.0
+gravity = Vector3(0, -9.8, 0)
+angular_velocity_min = -540.0
+angular_velocity_max = 540.0
+scale_min = 0.5
+scale_max = 1.5
+color = Color(0.25, 0.22, 0.18, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_detritos"]
+vertex_color_use_as_albedo = true
+roughness = 1.0
+
+[sub_resource type="BoxMesh" id="Mesh_detrito"]
+material = SubResource("Mat_detritos")
+size = Vector3(0.12, 0.08, 0.1)
+
+[node name="Explosion" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Flash" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+layers = 3
+light_color = Color(1, 0.7, 0.4, 1)
+light_energy = 0.0
+omni_range = 25.0
+
+[node name="Dirt" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 28
+lifetime = 2.2
+one_shot = true
+explosiveness = 0.95
+visibility_aabb = AABB(-10, -2, -10, 20, 30, 20)
+process_material = SubResource("Proc_terra")
+draw_pass_1 = SubResource("Quad_nuvem")
+
+[node name="Water" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 30
+lifetime = 2.4
+one_shot = true
+explosiveness = 0.95
+visibility_aabb = AABB(-10, -2, -10, 20, 30, 20)
+process_material = SubResource("Proc_agua")
+draw_pass_1 = SubResource("Quad_nuvem")
+
+[node name="Debris" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 24
+lifetime = 2.5
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB(-15, -3, -15, 30, 25, 30)
+process_material = SubResource("Proc_detritos")
+draw_pass_1 = SubResource("Mesh_detrito")
+
+[node name="Smoke" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 10
+lifetime = 4.5
+one_shot = true
+explosiveness = 0.7
+visibility_aabb = AABB(-15, -2, -15, 30, 25, 30)
+process_material = SubResource("Proc_fumaca")
+draw_pass_1 = SubResource("Quad_nuvem")

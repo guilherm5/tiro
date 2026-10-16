@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3]
+
+[ext_resource type="Script" path="res://systems/enemies/enemy_data.gd" id="1_data"]
+[ext_resource type="AudioStream" path="res://assets/audio/armas/kar98_tiro.tres" id="2_fire"]
+
+[resource]
+script = ExtResource("1_data")
+display_name = "Fuzileiro alemão"
+max_health = 100.0
+headshot_multiplier = 4.0
+sight_range = 70.0
+sight_fov_degrees = 120.0
+notice_time = 0.6
+hearing_range = 60.0
+walk_speed = 1.8
+run_speed = 4.2
+turn_speed = 6.0
+damage = 34.0
+fire_interval_min = 1.6
+fire_interval_max = 2.6
+reaction_time = 0.7
+spread_at_10m = 0.75
+moving_target_penalty = 1.6
+aim_settle_time = 4.0
+max_range = 200.0
+sound_fire = ExtResource("2_fire")
+cover_search_radius = 25.0
+hide_time_min = 1.2
+hide_time_max = 3.0
+shots_per_peek_min = 1
+shots_per_peek_max = 2

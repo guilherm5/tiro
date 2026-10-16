@@ -1,0 +1,66 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://systems/fx/one_shot_particles.gd" id="1_script"]
+
+[sub_resource type="Gradient" id="Gradient_suave"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="Tex_suave"]
+gradient = SubResource("Gradient_suave")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="Gradient_some"]
+offsets = PackedFloat32Array(0, 0.1, 1)
+colors = PackedColorArray(0.75, 0.74, 0.72, 0, 0.75, 0.74, 0.72, 0.18, 0.7, 0.7, 0.7, 0)
+
+[sub_resource type="GradientTexture1D" id="Tex_some"]
+gradient = SubResource("Gradient_some")
+
+[sub_resource type="Curve" id="Curve_cresce"]
+_data = [Vector2(0, 0.25), 0.0, 1.5, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="Tex_cresce"]
+curve = SubResource("Curve_cresce")
+
+[sub_resource type="ParticleProcessMaterial" id="Proc_fumaca"]
+direction = Vector3(0, 0, -1)
+spread = 18.0
+initial_velocity_min = 0.6
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0.25, 0)
+damping_min = 1.0
+damping_max = 2.0
+scale_min = 0.7
+scale_max = 1.3
+scale_curve = SubResource("Tex_cresce")
+color_ramp = SubResource("Tex_some")
+turbulence_enabled = true
+turbulence_noise_strength = 0.3
+
+[sub_resource type="StandardMaterial3D" id="Mat_fumaca"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("Tex_suave")
+roughness = 1.0
+billboard_mode = 3
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Quad_fumaca"]
+material = SubResource("Mat_fumaca")
+size = Vector2(0.4, 0.4)
+
+[node name="MuzzleSmoke" type="GPUParticles3D"]
+emitting = false
+amount = 4
+lifetime = 1.2
+one_shot = true
+explosiveness = 0.85
+visibility_aabb = AABB(-3, -2, -4, 6, 5, 6)
+process_material = SubResource("Proc_fumaca")
+draw_pass_1 = SubResource("Quad_fumaca")
+script = ExtResource("1_script")

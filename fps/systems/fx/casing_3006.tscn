@@ -1,0 +1,26 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://systems/fx/ejected_piece.gd" id="1_script"]
+[ext_resource type="AudioStream" path="res://assets/audio/provisorio/capsula_chao.tres" id="2_som"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_latao"]
+albedo_color = Color(0.78, 0.6, 0.28, 1)
+metallic = 0.9
+roughness = 0.35
+
+[sub_resource type="CylinderMesh" id="Mesh_capsula"]
+material = SubResource("Mat_latao")
+top_radius = 0.0055
+bottom_radius = 0.006
+height = 0.063
+radial_segments = 8
+rings = 1
+
+[node name="Casing" type="Node3D"]
+script = ExtResource("1_script")
+land_sound = ExtResource("2_som")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("Mesh_capsula")

@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://levels/props/obstaculo_praia.gd" id="1_script"]
+[ext_resource type="Material" path="res://assets/materiais/aco_enferrujado.tres" id="2_aco"]
+[ext_resource type="Material" path="res://assets/materiais/madeira_tronco.tres" id="3_madeira"]
+[ext_resource type="Material" path="res://assets/materiais/mina_teller.tres" id="4_mina"]
+[ext_resource type="Material" path="res://assets/materiais/concreto_bunker.tres" id="5_concreto"]
+
+[node name="ObstaculoPraia" type="StaticBody3D"]
+script = ExtResource("1_script")
+kind = "ourico"
+steel_material = ExtResource("2_aco")
+wood_material = ExtResource("3_madeira")
+mine_material = ExtResource("4_mina")
+concrete_material = ExtResource("5_concreto")

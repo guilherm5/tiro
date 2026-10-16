@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/texturas/rusty_metal_02/rusty_metal_02_cor.jpg" id="1_cor"]
+[ext_resource type="Texture2D" path="res://assets/texturas/rusty_metal_02/rusty_metal_02_normal.jpg" id="2_normal"]
+
+[resource]
+albedo_color = Color(0.42, 0.45, 0.38, 1)
+albedo_texture = ExtResource("1_cor")
+metallic = 0.55
+roughness = 0.6
+normal_enabled = true
+normal_texture = ExtResource("2_normal")
+uv1_triplanar = true
+uv1_scale = Vector3(2, 2, 2)

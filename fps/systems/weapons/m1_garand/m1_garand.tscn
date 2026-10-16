@@ -1,0 +1,79 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://systems/weapons/weapon.gd" id="1_weapon"]
+[ext_resource type="Resource" path="res://data/weapons/m1_garand.tres" id="2_data"]
+[ext_resource type="PackedScene" path="res://systems/fx/casing_3006.tscn" id="3_casing"]
+[ext_resource type="PackedScene" path="res://systems/fx/garand_clip.tscn" id="4_clip"]
+[ext_resource type="PackedScene" path="res://assets/armas/m1_garand/m1_garand.glb" id="5_modelo"]
+[ext_resource type="Script" path="res://systems/player/first_person_arms.gd" id="6_lllxa"]
+[ext_resource type="PackedScene" path="res://assets/personagens/americano/bracos_americano.glb" id="7_nv4d1"]
+
+[sub_resource type="Gradient" id="Gradient_clarao"]
+offsets = PackedFloat32Array(0, 0.25, 1)
+colors = PackedColorArray(1, 0.95, 0.8, 1, 1, 0.6, 0.2, 0.7, 1, 0.4, 0.1, 0)
+
+[sub_resource type="GradientTexture2D" id="Tex_clarao"]
+gradient = SubResource("Gradient_clarao")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="Mat_clarao"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_texture = SubResource("Tex_clarao")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="Mesh_clarao"]
+material = SubResource("Mat_clarao")
+size = Vector2(0.22, 0.22)
+
+[node name="M1Garand" type="Node3D" unique_id=720821580]
+script = ExtResource("1_weapon")
+data = ExtResource("2_data")
+casing_scene = ExtResource("3_casing")
+clip_scene = ExtResource("4_clip")
+model_brightness = 1.7
+aim_position = Vector3(0, -0.075, -0.1)
+
+[node name="Model" type="Node3D" parent="." unique_id=1712356631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17, -0.2, -0.32)
+
+[node name="Garand" parent="Model" unique_id=2079279067 instance=ExtResource("5_modelo")]
+transform = Transform3D(1, 0, 0, 0, 0.9999755, 0.0069998302, 0, -0.0069998302, 0.9999755, 0.0085, 0.05707044, -0.23987915)
+
+[node name="Muzzle" type="Marker3D" parent="Model" unique_id=1038077761]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.058220413, -0.78990066)
+
+[node name="Flash" type="MeshInstance3D" parent="Model/Muzzle" unique_id=140522507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.06)
+cast_shadow = 0
+mesh = SubResource("Mesh_clarao")
+
+[node name="FlashLight" type="OmniLight3D" parent="Model/Muzzle" unique_id=1427852403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15)
+light_color = Color(1, 0.72, 0.4, 1)
+light_energy = 3.0
+omni_range = 7.0
+
+[node name="Ejection" type="Marker3D" parent="Model" unique_id=424924361]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, 0.065, 0)
+
+[node name="Bracos" type="Node3D" parent="Model" unique_id=1391195327]
+script = ExtResource("6_lllxa")
+model_scene = ExtResource("7_nv4d1")
+rifle_path = NodePath("../Garand")
+
+[node name="FireAudio" type="AudioStreamPlayer" parent="." unique_id=1325531440]
+max_polyphony = 4
+bus = &"SFX"
+
+[node name="MechAudio" type="AudioStreamPlayer" parent="." unique_id=1719160435]
+volume_db = -4.0
+bus = &"SFX"
+
+[node name="PingAudio" type="AudioStreamPlayer" parent="." unique_id=1933067283]
+volume_db = -3.0
+bus = &"SFX"

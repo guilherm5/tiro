@@ -1,0 +1,119 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://systems/player/player_controller.gd" id="1_ctrl"]
+[ext_resource type="Script" path="res://systems/player/camera_effects.gd" id="2_camfx"]
+[ext_resource type="Script" path="res://systems/weapons/weapon_holder.gd" id="3_holder"]
+[ext_resource type="PackedScene" path="res://systems/weapons/m1_garand/m1_garand.tscn" id="4_garand"]
+[ext_resource type="Script" path="res://systems/player/viewmodel_camera.gd" id="5_vmcam"]
+[ext_resource type="Script" path="res://systems/player/footsteps.gd" id="6_steps"]
+[ext_resource type="AudioStream" path="res://assets/audio/provisorio/passo_areia_1.wav" id="7_p1"]
+[ext_resource type="AudioStream" path="res://assets/audio/provisorio/passo_areia_2.wav" id="8_p2"]
+[ext_resource type="AudioStream" path="res://assets/audio/provisorio/passo_areia_3.wav" id="9_p3"]
+[ext_resource type="AudioStream" path="res://assets/audio/provisorio/passo_areia_4.wav" id="10_p4"]
+[ext_resource type="Script" path="res://systems/combat/health.gd" id="11_health"]
+[ext_resource type="Script" path="res://systems/player/player_feedback.gd" id="12_feedback"]
+[ext_resource type="AudioStream" path="res://assets/audio/provisorio/impacto_corpo.wav" id="13_hit"]
+[ext_resource type="AudioStream" path="res://assets/audio/provisorio/batimento.wav" id="14_heart"]
+[ext_resource type="Script" path="res://systems/player/suppression.gd" id="15_supp"]
+[ext_resource type="Script" path="res://systems/player/interactor.gd" id="16_inter"]
+[ext_resource type="Script" path="res://systems/player/grenade_thrower.gd" id="17_gren"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.35
+height = 1.8
+
+[sub_resource type="AudioStreamRandomizer" id="Random_passos"]
+streams_count = 4
+stream_0/stream = ExtResource("7_p1")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("8_p2")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("9_p3")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("10_p4")
+stream_3/weight = 1.0
+random_pitch = 1.12
+random_volume_offset_db = 2.0
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 5
+floor_max_angle = 0.872665
+floor_snap_length = 0.3
+script = ExtResource("1_ctrl")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.66, 0)
+
+[node name="CameraRig" type="Node3D" parent="Head"]
+
+[node name="Camera" type="Camera3D" parent="Head/CameraRig"]
+cull_mask = 1048573
+current = true
+fov = 72.0
+near = 0.03
+script = ExtResource("2_camfx")
+
+[node name="WeaponHolder" type="Node3D" parent="Head/CameraRig/Camera"]
+script = ExtResource("3_holder")
+
+[node name="M1Garand" parent="Head/CameraRig/Camera/WeaponHolder" instance=ExtResource("4_garand")]
+
+[node name="ViewmodelLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Container" type="SubViewportContainer" parent="ViewmodelLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+
+[node name="Viewport" type="SubViewport" parent="ViewmodelLayer/Container"]
+transparent_bg = true
+handle_input_locally = false
+screen_space_aa = 1
+size = Vector2i(1600, 900)
+render_target_update_mode = 4
+
+[node name="ViewmodelCamera" type="Camera3D" parent="ViewmodelLayer/Container/Viewport" node_paths=PackedStringArray("source")]
+cull_mask = 2
+near = 0.01
+script = ExtResource("5_vmcam")
+source = NodePath("../../../../Head/CameraRig/Camera")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("11_health")
+regenerates = true
+
+[node name="Suppression" type="Node" parent="."]
+script = ExtResource("15_supp")
+
+[node name="Feedback" type="Node" parent="."]
+script = ExtResource("12_feedback")
+
+[node name="HitAudio" type="AudioStreamPlayer" parent="Feedback"]
+stream = ExtResource("13_hit")
+max_polyphony = 3
+
+[node name="Heartbeat" type="AudioStreamPlayer" parent="Feedback"]
+stream = ExtResource("14_heart")
+volume_db = -60.0
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="."]
+stream = SubResource("Random_passos")
+volume_db = -8.0
+bus = &"SFX"
+script = ExtResource("6_steps")
+
+[node name="Interactor" type="Node" parent="."]
+script = ExtResource("16_inter")
+
+[node name="GrenadeThrower" type="Node" parent="."]
+script = ExtResource("17_gren")
